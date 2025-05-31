@@ -16,6 +16,7 @@ enum FilterType {
 
 struct ProspectView: View {
     let filter:FilterType
+    let listItemSpacing:CGFloat = 15
     var title:String {
         switch filter {
         case .today:
@@ -31,7 +32,27 @@ struct ProspectView: View {
     
     var body: some View {
         NavigationStack {
-            Text(title).navigationTitle(title)
+            VStack {
+                LazyVGrid(columns: [GridItem()], alignment: .leading, spacing:listItemSpacing ,content: {
+                    HStack {
+                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
+                        Text("ddd")
+                    }
+                    Divider()
+                    HStack {
+                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
+                        Text("ddd")
+                    }
+                    Divider()
+                    HStack {
+                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
+                        Text("ddd")
+                    }
+                })
+                
+                Spacer()
+            }
+            .navigationTitle("Today")
         }
     }
     

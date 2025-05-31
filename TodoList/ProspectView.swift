@@ -30,23 +30,23 @@ struct ProspectView: View {
         }
     }
     
+    @State private var isFinishedTheTask = false
+    
+    @StateObject var viewModel = TodoListViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {
                 LazyVGrid(columns: [GridItem()], alignment: .leading, spacing:listItemSpacing ,content: {
-                    HStack {
-                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
-                        Text("ddd")
-                    }
-                    Divider()
-                    HStack {
-                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
-                        Text("ddd")
-                    }
-                    Divider()
-                    HStack {
-                        Circle().fill(Color.white).stroke(Color.gray).frame(width: 30).padding()
-                        Text("ddd")
+                    ForEach(viewModel.todoListItems, id: \.id) { item in
+                        HStack {
+                            Circle().fill(item.isFinished ?  Color.green : Color.white).stroke(Color.gray).frame(width: 30).padding().onTapGesture {
+                                withAnimation {
+                                    viewModel.finishTask(task: item)
+                                }
+                            }
+                            Text(item.titile)
+                        }
                     }
                 })
                 

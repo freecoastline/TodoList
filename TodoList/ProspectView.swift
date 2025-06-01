@@ -31,6 +31,7 @@ struct ProspectView: View {
     }
     
     @State private var isFinishedTheTask = false
+    @State private var showAddTaskSheet = false
     
     @StateObject var viewModel = TodoListViewModel()
     
@@ -54,6 +55,19 @@ struct ProspectView: View {
             }
             .navigationTitle("Today")
         }
+        HStack(content: {
+            Spacer()
+            Button {
+                showAddTaskSheet.toggle()
+            } label: {
+                Image(systemName: "plus.app").font(.system(size: 40))
+                    .padding()
+            }
+            .sheet(isPresented: $showAddTaskSheet) {
+                Text("For you")
+                    .presentationDetents([.fraction(0.5)])
+            }
+        })
     }
     
     init(filter: FilterType) {

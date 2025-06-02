@@ -32,6 +32,8 @@ struct ProspectView: View {
     
     @State private var isFinishedTheTask = false
     @State private var showAddTaskSheet = false
+    @State private var name = "come inddddddddddddd"
+    
     
     @StateObject var viewModel = TodoListViewModel()
     
@@ -50,7 +52,6 @@ struct ProspectView: View {
                         }
                     }
                 })
-                
                 Spacer()
             }
             .navigationTitle("Today")
@@ -64,7 +65,11 @@ struct ProspectView: View {
                     .padding()
             }
             .sheet(isPresented: $showAddTaskSheet) {
-                Text("For you")
+                TextField("Enter your name", text: $name)
+                  .foregroundColor(.blue)
+                  .background(.yellow)
+                  .font(.largeTitle)
+                  .multilineTextAlignment(.center)
                     .presentationDetents([.fraction(0.5)])
             }
         })

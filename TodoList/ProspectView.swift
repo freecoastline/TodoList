@@ -70,7 +70,7 @@ struct ProspectView: View {
                   .background(.yellow)
                   .font(.largeTitle)
                   .multilineTextAlignment(.center)
-                    .presentationDetents([.fraction(0.5)])
+                    .presentationDetents([.fraction(0.1)])
             }
         })
     }

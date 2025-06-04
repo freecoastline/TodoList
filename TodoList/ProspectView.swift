@@ -32,8 +32,9 @@ struct ProspectView: View {
     
     @State private var isFinishedTheTask = false
     @State private var showAddTaskSheet = false
-    @State private var name = "come inddddddddddddd"
-    
+    @State private var showDateChosenPage = false
+    @State private var taskTitle = ""
+    @State private var description = ""
     
     @StateObject var viewModel = TodoListViewModel()
     
@@ -65,12 +66,23 @@ struct ProspectView: View {
                     .padding()
             }
             .sheet(isPresented: $showAddTaskSheet) {
-                TextField("Enter your name", text: $name)
-                  .foregroundColor(.blue)
-                  .background(.yellow)
-                  .font(.largeTitle)
-                  .multilineTextAlignment(.center)
-                    .presentationDetents([.fraction(0.1)])
+                VStack(alignment: .leading, spacing: 12, content: {
+                       TextField("For example:go to supermarket on saturday", text: $taskTitle)
+                           .font(.title3)
+                       TextField("description", text: $description)
+                           .font(.title3)
+                       Spacer()
+                }).padding()
+                HStack(alignment: .center, content: {
+                    Button("今天") {
+                        showDateChosenPage.toggle()
+                    }
+                    .sheet(isPresented: $showDateChosenPage) {
+                        DateChosenSheet()
+                    }
+                })
+                .presentationDetents([.fraction(0.6)])
+                
             }
         })
     }
